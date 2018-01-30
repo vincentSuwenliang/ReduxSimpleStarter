@@ -1,10 +1,12 @@
+var path = require('path');
+
 module.exports = {
   entry: [
     './src/index.js'
   ],
   output: {
-    path: __dirname,
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'), // use resolve instead of join
+    publicPath: 'dist/',
     filename: 'bundle.js'
   },
   module: {
@@ -21,6 +23,9 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './'
+    contentBase: "./",
+    // GET ERROR cause the contentBase is the .html file instead of bundle.js
+    // https://stackoverflow.com/questions/37954809/cannot-get-error-running-hello-world-in-webpack
+    port: 8085
   }
 };
